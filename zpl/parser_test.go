@@ -9,8 +9,11 @@ func TestParser(t *testing.T) {
 
 	t.Run("parse open", func(t *testing.T) {
 		got := zplData()
-		//zpl := &zpl.ZplCom{}
-		zpl.Parese([]byte(got))
+
+		commands := zpl.Parese([]byte(got))
+		//	fmt.Print(commands)
+		c := commands[61]
+		c.GetParameters()
 
 		want := "Top section with logo, name and address."
 

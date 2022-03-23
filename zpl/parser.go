@@ -2,31 +2,27 @@ package zpl
 
 import "fmt"
 
-func Parese(input []byte) {
+func Parese(input []byte) map[int]Command {
 	var buffCommands = make(map[int]Command)
 	var currentCommand Command
 
-	for i, item := range input {
+	for i, s := range input {
 		var commandToken string
 
-		if "^" == string(item) {
+		if "^" == string(s) {
 			commandToken = fmt.Sprintf("^%s%s", string(input[i+1]), string(input[i+2]))
 		}
 
-		comm, err := CreateCommand(commandToken)
-
+		c, err := CreateCommand(commandToken)
 		if nil == err {
 			if 0 < len(currentCommand.ZplComm) {
 				buffCommands[i] = currentCommand
 			}
-			currentCommand = comm
+			currentCommand = c
 		} else {
-			currentCommand.AddToBuffer(string(item))
+			currentCommand.AddToBuffer(s)
 		}
 	}
 
-	fmt.Print(buffCommands)
-
-	//fmt.Print(currentCommand)
-
+	return buffCommands
 }
