@@ -7,18 +7,16 @@ import (
 
 func TestParser(t *testing.T) {
 
-	t.Run("parse open", func(t *testing.T) {
-		got := zplData()
-
-		commands := zpl.Parese([]byte(got))
-		//	fmt.Print(commands)
+	t.Run("test fdHandler", func(t *testing.T) {
+		zplData := zplData()
+		commands := zpl.Parese([]byte(zplData))
 		c := commands[489]
-		c.GetParameters()
+		param := c.GetParameters()
 
-		want := "Top section with logo, name and address."
-
+		got := param[0].Value
+		want := "Springfield TN 39021"
 		if got != want {
-			t.Fatal("got")
+			t.Fatal(got)
 		}
 	})
 }

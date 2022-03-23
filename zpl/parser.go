@@ -15,7 +15,7 @@ func Parese(input []byte) map[int]Command {
 
 		c, err := CreateCommand(commandToken)
 		if nil == err {
-			if 0 < len(currentCommand.ZplComm) {
+			if 0 < len(currentCommand.ZplCommToken) {
 				buffCommands[i] = currentCommand
 			}
 			currentCommand = c

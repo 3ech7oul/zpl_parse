@@ -2,18 +2,16 @@ package zpl
 
 import (
 	"errors"
-	"fmt"
 	"regexp"
 )
 
 type Command struct {
-	ZplComm    string
-	Buffer     []byte
-	Parameters []CommandParameter
+	ZplCommToken string
+	Buffer       []byte
+	parameters   []CommandParameter
 }
 
 type CommandParameter struct {
-	Index int
 	Value string
 }
 
@@ -22,7 +20,7 @@ func CreateCommand(commandToken string) (Command, error) {
 
 	if isCommandToken(commandToken) {
 		result = Command{
-			ZplComm: commandToken,
+			ZplCommToken: commandToken,
 		}
 
 		return result, nil
@@ -44,6 +42,25 @@ func (c *Command) AddToBuffer(b byte) {
 	c.Buffer = append(c.Buffer, b)
 }
 
-func (c *Command) GetParameters() {
-	fmt.Println(string(c.Buffer))
+func (c *Command) GetParameters() []CommandParameter {
+
+	if 0 < len(c.parameters) {
+		return c.parameters
+	}
+
+	handler := c.findHandler()
+	if nil != handler {
+		c.parameters = handler(c.ZplCommToken, c.Buffer)
+	}
+
+	return c.parameters
+}
+
+func (c *Command) findHandler() ParametersHandlerFunc {
+	result, ok := ZplPdfHandlers[c.ZplCommToken]
+	if ok {
+		return result
+	}
+
+	return nil
 }
