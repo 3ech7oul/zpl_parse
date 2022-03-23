@@ -12,7 +12,7 @@ func TestParser(t *testing.T) {
 
 		commands := zpl.Parese([]byte(got))
 		//	fmt.Print(commands)
-		c := commands[61]
+		c := commands[489]
 		c.GetParameters()
 
 		want := "Top section with logo, name and address."

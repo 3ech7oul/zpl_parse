@@ -4,21 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
-
-	"github.com/signintech/gopdf"
 )
-
-var zplCommnads = map[string]ZplHandlerFunc{
-	//"^FD": zplCfHandler,
-	//"^FX": zplCfHandler,
-	//"^XA": zplCfHandler,
-	//"^FS": zplCfHandler,
-	//"^GB": zplCfHandler,
-	//"^FO": zplCfHandler,
-	"^CF": zplCfHandler,
-}
-
-type ZplHandlerFunc func(c Command)
 
 type Command struct {
 	ZplComm    string
@@ -60,9 +46,4 @@ func (c *Command) AddToBuffer(b byte) {
 
 func (c *Command) GetParameters() {
 	fmt.Println(string(c.Buffer))
-}
-
-func zplCfHandler(c Command) {
-	pdf := gopdf.GoPdf{}
-	fmt.Println(pdf)
 }
