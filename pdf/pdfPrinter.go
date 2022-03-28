@@ -9,7 +9,7 @@ import (
 
 var ZplPdfHandlers = map[string]HandlerFunc{
 	"^FD": fdHandler,
-	//"^FX": zplCfHandler,
+	//"^FX": zplCfHandler,pdf
 	//"^XA": zplCfHandler,
 	//"^FS": zplCfHandler,
 	//"^GB": zplCfHandler,
@@ -21,10 +21,10 @@ type HandlerFunc func(c zpl.Command, p gopdf.GoPdf) gopdf.GoPdf
 
 type Pdf struct {
 	pdf         gopdf.GoPdf
-	zplCommands []zpl.Command
+	zplCommands map[int]zpl.Command
 }
 
-func CreatePdf(zpl []zpl.Command) Pdf {
+func CreatePdf(zpl map[int]zpl.Command) Pdf {
 	p := gopdf.GoPdf{}
 	p.Start(gopdf.Config{PageSize: *gopdf.PageSizeA4})
 	p.AddPage()

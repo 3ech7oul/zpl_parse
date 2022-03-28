@@ -2,7 +2,7 @@ package zpl
 
 import "fmt"
 
-func Parese(input []byte) map[int]Command {
+func Parser(input []byte) map[int]Command {
 	var buffCommands = make(map[int]Command)
 	var currentCommand Command
 

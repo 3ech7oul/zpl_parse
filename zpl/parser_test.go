@@ -9,7 +9,7 @@ func TestParser(t *testing.T) {
 
 	t.Run("test fdHandler", func(t *testing.T) {
 		zplData := zplData()
-		commands := zpl.Parese([]byte(zplData))
+		commands := zpl.Parser([]byte(zplData))
 		c := commands[489]
 		param := c.GetParameters()
 

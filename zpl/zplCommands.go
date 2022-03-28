@@ -48,7 +48,7 @@ func (c *Command) GetParameters() []CommandParameter {
 		return c.parameters
 	}
 
-	handler := c.findHandler()
+	handler := c.findParser()
 	if nil != handler {
 		c.parameters = handler(c.ZplCommToken, c.Buffer)
 	}
@@ -56,8 +56,8 @@ func (c *Command) GetParameters() []CommandParameter {
 	return c.parameters
 }
 
-func (c *Command) findHandler() ParametersHandlerFunc {
-	result, ok := ZplPdfHandlers[c.ZplCommToken]
+func (c *Command) findParser() ParametersParserFunc {
+	result, ok := ZplPdfParsers[c.ZplCommToken]
 	if ok {
 		return result
 	}
