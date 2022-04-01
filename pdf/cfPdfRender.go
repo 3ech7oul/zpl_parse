@@ -6,6 +6,6 @@ import (
 	"github.com/signintech/gopdf"
 )
 
-func cfRenderer(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
+func cfRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
 	return p
 }

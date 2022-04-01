@@ -7,13 +7,13 @@ import (
 )
 
 var ZplPdfHandlers = map[string]HandlerFunc{
-	"^FD": fdRenderer,
+	"^FD": fdRender,
 	//"^FX": zplCfHandler,pdf
 	//"^XA": zplCfHandler,
 	//"^FS": zplCfHandler,
 	//"^GB": zplCfHandler,
-	"^FO": foRenderer,
-	"^CF": cfRenderer,
+	"^FO": foRender,
+	"^CF": cfRender,
 }
 
 type HandlerFunc func(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf
