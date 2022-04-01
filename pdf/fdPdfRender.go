@@ -6,7 +6,7 @@ import (
 	"github.com/signintech/gopdf"
 )
 
-func fdRenderer(c zpl.Command, p gopdf.GoPdf) gopdf.GoPdf {
+func fdRenderer(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
 	params := c.GetParameters()
 
 	if len(params) < 1 {

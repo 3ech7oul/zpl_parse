@@ -16,7 +16,7 @@ var ZplPdfHandlers = map[string]HandlerFunc{
 	"^CF": cfRenderer,
 }
 
-type HandlerFunc func(c zpl.Command, p gopdf.GoPdf) gopdf.GoPdf
+type HandlerFunc func(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf
 
 type Pdf struct {
 	pdf         gopdf.GoPdf
