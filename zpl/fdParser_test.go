@@ -10,7 +10,7 @@ func TestFdParser(t *testing.T) {
 	t.Run("test fdParser", func(t *testing.T) {
 		zplData := zplData()
 		commands := zpl.Parser([]byte(zplData))
-		c := commands[256]
+		c := commands[14]
 		params := c.GetParameters()
 
 		if len(params) != 1 {
@@ -18,10 +18,10 @@ func TestFdParser(t *testing.T) {
 		}
 
 		fieldText := params[0].Value
-		expectedText := "Shelbyville TN 38102"
+		expectedText := "Intershipping, Inc."
 
 		if fieldText != expectedText {
-			t.Fatal("Field text from params has to be Shelbyville TN 38102, got: " + fieldText)
+			t.Fatal("Field text from params has to be Intershipping, Inc., got: " + fieldText)
 		}
 	})
 }
