@@ -1,26 +1,5 @@
 package zpl_test
 
-import (
-	"testing"
-	zpl "zplgun/zpl"
-)
-
-func TestParser(t *testing.T) {
-
-	t.Run("test fdHandler", func(t *testing.T) {
-		zplData := zplData()
-		commands := zpl.Parser([]byte(zplData))
-		c := commands[489]
-		param := c.GetParameters()
-
-		got := param[0].Value
-		want := "Springfield TN 39021"
-		if got != want {
-			t.Fatal(got)
-		}
-	})
-}
-
 func zplData() string {
 	return `^XA
 
