@@ -1,6 +1,7 @@
 package pdf
 
 import (
+	"fmt"
 	zpl "zplgun/zpl"
 
 	"github.com/signintech/gopdf"
@@ -22,10 +23,10 @@ type RenderFunc func(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf
 
 type Pdf struct {
 	pdf         gopdf.GoPdf
-	zplCommands map[int]zpl.Command
+	zplCommands []zpl.Command
 }
 
-func CreatePdf(zpl map[int]zpl.Command) Pdf {
+func CreatePdf(zpl []zpl.Command) Pdf {
 	p := gopdf.GoPdf{}
 	p.Start(gopdf.Config{PageSize: *gopdf.PageSizeA4})
 	p.AddPage()
@@ -40,6 +41,7 @@ func CreatePdf(zpl map[int]zpl.Command) Pdf {
 
 func (p *Pdf) Render() {
 	for _, c := range p.zplCommands {
+		fmt.Println(c)
 		r := findRender(c)
 		if nil != r {
 			r(c, &p.pdf)
