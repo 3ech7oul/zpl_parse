@@ -7,27 +7,34 @@ import (
 	"github.com/signintech/gopdf"
 )
 
-func foRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
+func foRender(c zpl.Command, p *Pdf) *gopdf.GoPdf {
 	params := c.GetParameters()
 
 	if len(params) < 2 {
-		return p
+		return &p.pdf
 	}
 
 	x, err := strconv.ParseFloat(params[0].Value, 64)
 
 	if nil != err {
-		return p
+		return &p.pdf
 	}
 
 	y, err := strconv.ParseFloat(params[1].Value, 64)
 
 	if nil != err {
-		return p
+		return &p.pdf
 	}
 
-	p.SetX(x)
-	p.SetY(y)
+	labelX, errLhX := strconv.ParseFloat(p.globalSettings["labelHomeX"], 64)
+	labelY, errLhY := strconv.ParseFloat(p.globalSettings["labelHomeY"], 64)
 
-	return p
+	if nil != errLhX || nil != errLhY {
+		return &p.pdf
+	}
+
+	p.pdf.SetX(labelX + x)
+	p.pdf.SetY(labelY + y)
+
+	return &p.pdf
 }
