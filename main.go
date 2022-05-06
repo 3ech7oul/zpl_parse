@@ -15,6 +15,7 @@ func main() {
 func zplData() string {
 	return `^XA
 
+	^LH0,150
 	^FX Top section with logo, name and address.
 	^CF0,60
 	^FO50,50^GB100,100,100^FS

@@ -9,6 +9,7 @@ import (
 
 var ZplPdfRenders = map[string]RenderFunc{
 	"^FD": fdRender,
+	"^LH": lhRender,
 	//"^FX": zplCfHandler,pdf
 	//"^XA": zplCfHandler,
 	//"^FS": zplCfHandler,
@@ -17,14 +18,20 @@ var ZplPdfRenders = map[string]RenderFunc{
 	"^CF": cfRender,
 }
 
+var defaultGlobalSettings = map[string]string{
+	"labelHomeX": "0",
+	"labelHomeY": "0",
+}
+
 var pdfFileName = "zpl_output.pdf"
 
-type RenderFunc func(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf
-
 type Pdf struct {
-	pdf         gopdf.GoPdf
-	zplCommands []zpl.Command
+	pdf            gopdf.GoPdf
+	zplCommands    []zpl.Command
+	globalSettings map[string]string
 }
+
+type RenderFunc func(c zpl.Command, p *Pdf) *gopdf.GoPdf
 
 func CreatePdf(zpl []zpl.Command) Pdf {
 	p := gopdf.GoPdf{}
@@ -34,8 +41,9 @@ func CreatePdf(zpl []zpl.Command) Pdf {
 	p.SetFont("times", "", 14)
 
 	return Pdf{
-		pdf:         p,
-		zplCommands: zpl,
+		pdf:            p,
+		zplCommands:    zpl,
+		globalSettings: defaultGlobalSettings,
 	}
 }
 
@@ -44,7 +52,7 @@ func (p *Pdf) Render() {
 		fmt.Println(c)
 		r := findRender(c)
 		if nil != r {
-			r(c, &p.pdf)
+			r(c, p)
 		}
 	}
 }
