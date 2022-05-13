@@ -1,10 +1,10 @@
 package zpl
 
-func fdParser(params []string) []CommandParameter {
-	var result []CommandParameter
+func fdParser(cToken string, buffer []byte) []string {
+	var result []string
 
-	for _, coord := range params {
-		result = append(result, CommandParameter{Value: coord})
-	}
+	v := removeZplCommandToken(string(buffer), cToken)
+	result = append(result, v)
+
 	return result
 }

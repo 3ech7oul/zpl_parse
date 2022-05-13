@@ -14,13 +14,13 @@ func foRender(c zpl.Command, p *Pdf) *gopdf.GoPdf {
 		return &p.pdf
 	}
 
-	x, err := strconv.ParseFloat(params[0].Value, 64)
+	x, err := strconv.ParseFloat(params[0], 64)
 
 	if nil != err {
 		return &p.pdf
 	}
 
-	y, err := strconv.ParseFloat(params[1].Value, 64)
+	y, err := strconv.ParseFloat(params[1], 64)
 
 	if nil != err {
 		return &p.pdf

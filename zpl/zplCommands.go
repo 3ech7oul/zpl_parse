@@ -3,17 +3,12 @@ package zpl
 import (
 	"errors"
 	"regexp"
-	"strings"
 )
 
 type Command struct {
 	ZplCommToken string
 	Buffer       []byte
-	parameters   []CommandParameter
-}
-
-type CommandParameter struct {
-	Value string
+	parameters   []string
 }
 
 func CreateCommand(commandToken string) (Command, error) {
@@ -32,18 +27,15 @@ func CreateCommand(commandToken string) (Command, error) {
 
 func isCommandToken(str string) bool {
 	var re = regexp.MustCompile(`(?m)(\^)+(\D)+(\D)`)
-	if len(re.FindAllString(str, -1)) > 0 {
-		return true
-	}
 
-	return false
+	return len(re.FindAllString(str, -1)) > 0
 }
 
 func (c *Command) AddToBuffer(b byte) {
 	c.Buffer = append(c.Buffer, b)
 }
 
-func (c *Command) GetParameters() []CommandParameter {
+func (c *Command) GetParameters() []string {
 
 	if 0 < len(c.parameters) {
 		return c.parameters
@@ -51,10 +43,7 @@ func (c *Command) GetParameters() []CommandParameter {
 
 	handler := c.findParser()
 	if nil != handler {
-		v := removeZplCommandToken(string(c.Buffer), c.ZplCommToken)
-		params := strings.Split(v, ",")
-
-		c.parameters = handler(params)
+		c.parameters = handler(c.ZplCommToken, c.Buffer)
 	}
 
 	return c.parameters
@@ -66,5 +55,5 @@ func (c *Command) findParser() ParametersParserFunc {
 		return result
 	}
 
-	return nil
+	return defaultParser
 }
