@@ -13,7 +13,7 @@ func fdRender(c zpl.Command, p *Pdf) *gopdf.GoPdf {
 		return &p.pdf
 	}
 
-	p.Cell(nil, params[0])
+	p.pdf.Cell(nil, params[0])
 
 	return &p.pdf
 }

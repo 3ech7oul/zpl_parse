@@ -18,9 +18,7 @@ func defaultParser(cToken string, buffer []byte) []string {
 
 	vals := strings.Split(v, ",")
 
-	for _, coord := range vals {
-		result = append(result, coord)
-	}
+	result = append(result, vals...)
 
 	return result
 }

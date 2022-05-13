@@ -4,16 +4,14 @@ import (
 	"strings"
 )
 
-func lhParser(cToken string, buffer []byte) []CommandParameter {
-	var result []CommandParameter
+func lhParser(cToken string, buffer []byte) []string {
+	var result []string
 
 	v := removeZplCommandToken(string(buffer), cToken)
 	// Explode coordinates to separate params
 	vals := strings.Split(v, ",")
 
-	for _, coord := range vals {
-		result = append(result, CommandParameter{Value: coord})
-	}
+	result = append(result, vals...)
 
 	return result
 }

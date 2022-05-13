@@ -13,8 +13,8 @@ func lhRender(c zpl.Command, p *Pdf) *gopdf.GoPdf {
 		return &p.pdf
 	}
 
-	p.globalSettings["labelHomeX"] = params[0].Value
-	p.globalSettings["labelHomeY"] = params[1].Value
+	p.globalSettings["labelHomeX"] = params[0]
+	p.globalSettings["labelHomeY"] = params[1]
 
 	return &p.pdf
 }
