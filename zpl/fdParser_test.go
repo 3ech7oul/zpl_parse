@@ -17,7 +17,7 @@ func TestFdParser(t *testing.T) {
 			t.Fatal("Got wrong number of params from buffer")
 		}
 
-		fieldText := params[0].Value
+		fieldText := params[0]
 		expectedText := "Intershipping, Inc."
 
 		if fieldText != expectedText {

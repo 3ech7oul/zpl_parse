@@ -6,11 +6,22 @@ import (
 
 var ZplPdfParsers = map[string]ParametersParserFunc{
 	"^FD": fdParser,
-	"^FO": foParser,
 	"^LH": lhParser,
 }
 
-type ParametersParserFunc func(c string, b []byte) []CommandParameter
+type ParametersParserFunc func(cToken string, buffer []byte) []string
+
+func defaultParser(cToken string, buffer []byte) []string {
+	var result []string
+
+	v := removeZplCommandToken(string(buffer), cToken)
+
+	vals := strings.Split(v, ",")
+
+	result = append(result, vals...)
+
+	return result
+}
 
 // Removing zpl command token from parameters strig, the text field in this case.
 func removeZplCommandToken(str string, token string) string {
