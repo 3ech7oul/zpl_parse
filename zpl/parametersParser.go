@@ -6,7 +6,6 @@ import (
 
 var ZplPdfParsers = map[string]ParametersParserFunc{
 	"^FD": fdParser,
-	"^LH": lhParser,
 }
 
 type ParametersParserFunc func(cToken string, buffer []byte) []string
