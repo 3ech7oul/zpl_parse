@@ -14,6 +14,9 @@ func zplData() string {
 	^FO220,155^FDShelbyville TN 38102^FS
 	^FO220,195^FDUnited States (USA)^FS
 	^FO50,250^GB700,3,3^FS
+
+	^FPV,0^FDvertical^FS
+    ^FO100,10^FPR,0^FDreverse^FS
 	
 	^FX Second section with recipient address and permit information.
 	^CFA,30
