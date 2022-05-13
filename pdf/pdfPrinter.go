@@ -1,7 +1,6 @@
 package pdf
 
 import (
-	"fmt"
 	zpl "zplgun/zpl"
 
 	"github.com/signintech/gopdf"
@@ -49,7 +48,6 @@ func CreatePdf(zpl []zpl.Command) Pdf {
 
 func (p *Pdf) Render() {
 	for _, c := range p.zplCommands {
-		fmt.Println(c)
 		r := findRender(c)
 		if nil != r {
 			r(c, p)

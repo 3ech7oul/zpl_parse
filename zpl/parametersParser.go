@@ -10,7 +10,7 @@ var ZplPdfParsers = map[string]ParametersParserFunc{
 	"^LH": lhParser,
 }
 
-type ParametersParserFunc func(c string, b []byte) []CommandParameter
+type ParametersParserFunc func(c []string) []CommandParameter
 
 // Removing zpl command token from parameters strig, the text field in this case.
 func removeZplCommandToken(str string, token string) string {

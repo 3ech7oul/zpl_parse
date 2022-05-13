@@ -1,17 +1,9 @@
 package zpl
 
-import (
-	"strings"
-)
-
-func foParser(cToken string, buffer []byte) []CommandParameter {
+func foParser(params []string) []CommandParameter {
 	var result []CommandParameter
 
-	v := removeZplCommandToken(string(buffer), cToken)
-	// Explode coordinates to separate params
-	vals := strings.Split(v, ",")
-
-	for _, coord := range vals {
+	for _, coord := range params {
 		result = append(result, CommandParameter{Value: coord})
 	}
 

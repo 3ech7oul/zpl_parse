@@ -3,6 +3,7 @@ package zpl
 import (
 	"errors"
 	"regexp"
+	"strings"
 )
 
 type Command struct {
@@ -50,7 +51,10 @@ func (c *Command) GetParameters() []CommandParameter {
 
 	handler := c.findParser()
 	if nil != handler {
-		c.parameters = handler(c.ZplCommToken, c.Buffer)
+		v := removeZplCommandToken(string(c.Buffer), c.ZplCommToken)
+		params := strings.Split(v, ",")
+
+		c.parameters = handler(params)
 	}
 
 	return c.parameters
