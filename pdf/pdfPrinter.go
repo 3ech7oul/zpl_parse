@@ -16,19 +16,27 @@ var ZplPdfRenders = map[string]RenderFunc{
 	"^FO": foRender,
 	"^CF": cfRender,
 	"^FP": fpRender,
+	"^BY": byRender,
 }
 
-var defaultGlobalSettings = map[string]string{
-	"labelHomeX": "0",
-	"labelHomeY": "0",
+type labelHomeSettings struct {
+	X float64
+	Y float64
+}
+
+type barcodeSettings struct {
+	Width      float64
+	WidthRatio float64
+	Height     float64
 }
 
 var pdfFileName = "zpl_output.pdf"
 
 type Pdf struct {
-	pdf            gopdf.GoPdf
-	zplCommands    []zpl.Command
-	globalSettings map[string]string
+	pdf               gopdf.GoPdf
+	zplCommands       []zpl.Command
+	labelHomeSettings labelHomeSettings
+	barcodeSettings   barcodeSettings
 }
 
 type RenderFunc func(c zpl.Command, p *Pdf) *gopdf.GoPdf
@@ -41,9 +49,10 @@ func CreatePdf(zpl []zpl.Command) Pdf {
 	p.SetFont("times", "", 14)
 
 	return Pdf{
-		pdf:            p,
-		zplCommands:    zpl,
-		globalSettings: defaultGlobalSettings,
+		pdf:               p,
+		zplCommands:       zpl,
+		labelHomeSettings: labelHomeSettings{X: 0, Y: 0},
+		barcodeSettings:   barcodeSettings{Width: 0, WidthRatio: 0, Height: 0},
 	}
 }
 
