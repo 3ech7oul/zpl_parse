@@ -15,6 +15,7 @@ var ZplPdfRenders = map[string]RenderFunc{
 	//"^GB": zplCfHandler,
 	"^FO": foRender,
 	"^CF": cfRender,
+	"^FP": fpRender,
 }
 
 var defaultGlobalSettings = map[string]string{
