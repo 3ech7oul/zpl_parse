@@ -27,20 +27,27 @@ func fpRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
 		return p
 	}
 
-	direction := params[0].Value;
-
 	charterGap, err := strconv.ParseInt(params[1].Value, 4, 64);
 
 	if nil != err {
 		return p
 	}
 
-	fmt.Print(direction)
 	fmt.Print(charterGap)
 
-	// Set output direction
-	
-
+	switch direction := params[0].Value; direction {
+	case "V":
+		// Set vertical output options
+		// https://kbpdfstudio.qoppa.com/adding-vertical-text-to-a-pdf-page/
+	case "R":
+		// Set reverse output options
+		// https://answers.acrobatusers.com/Tiny-side-reversed-text-showing-up-q5414.aspx
+		// https://en.wikipedia.org/wiki/Kerning
+		// 
+	default:
+		// For H do nothing, this is default derection
+		return p
+	}
 
 	return p
 }
