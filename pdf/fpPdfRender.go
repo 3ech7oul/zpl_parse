@@ -27,7 +27,7 @@ func fpRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
 		return p
 	}
 
-	charterGap, err := strconv.ParseInt(params[1].Value, 4, 64);
+	charterGap, err := strconv.ParseInt(params[1], 4, 64)
 
 	if nil != err {
 		return p
@@ -35,15 +35,16 @@ func fpRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
 
 	fmt.Print(charterGap)
 
-	switch direction := params[0].Value; direction {
+	switch direction := params[0]; direction {
 	case "V":
 		// Set vertical output options
+		// Use field presetting in global variables
 		// https://kbpdfstudio.qoppa.com/adding-vertical-text-to-a-pdf-page/
 	case "R":
-		// Set reverse output options
+		// Set reverse output options - postponed right now
 		// https://answers.acrobatusers.com/Tiny-side-reversed-text-showing-up-q5414.aspx
 		// https://en.wikipedia.org/wiki/Kerning
-		// 
+		//
 	default:
 		// For H do nothing, this is default derection
 		return p
