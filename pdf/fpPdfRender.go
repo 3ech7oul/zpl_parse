@@ -20,17 +20,17 @@ import (
 			0 to 9999
 			Default: 0 if no value is entered
 */
-func fpRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
+func fpRender(c zpl.Command, p *Pdf) *gopdf.GoPdf {
 	params := c.GetParameters()
 
 	if len(params) < 2 {
-		return p
+		return &p.pdf
 	}
 
 	charterGap, err := strconv.ParseInt(params[1], 4, 64)
 
 	if nil != err {
-		return p
+		return &p.pdf
 	}
 
 	fmt.Print(charterGap)
@@ -47,8 +47,8 @@ func fpRender(c zpl.Command, p *gopdf.GoPdf) *gopdf.GoPdf {
 		//
 	default:
 		// For H do nothing, this is default derection
-		return p
+		return &p.pdf
 	}
 
-	return p
+	return &p.pdf
 }
